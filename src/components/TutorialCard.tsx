@@ -1,4 +1,5 @@
 import type { Tutorial } from '../data/tutorials';
+import { fallbackCover } from '../data/tutorials';
 
 type TutorialCardProps = {
   tutorial: Tutorial;
@@ -24,8 +25,11 @@ export default function TutorialCard({
     >
       <div className="relative h-52 overflow-hidden">
         <img
-          src={tutorial.cover}
+          src={tutorial.cover || fallbackCover}
           alt={tutorial.title}
+          onError={(event) => {
+            event.currentTarget.src = fallbackCover;
+          }}
           className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
@@ -47,7 +51,7 @@ export default function TutorialCard({
 
         <h3 className="text-xl font-semibold text-white">{tutorial.title}</h3>
 
-        <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-300">
+        <p className="mt-3 text-sm leading-6 text-slate-300">
           {tutorial.description}
         </p>
 

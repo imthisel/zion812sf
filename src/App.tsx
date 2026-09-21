@@ -1,17 +1,52 @@
 import { useMemo, useState } from 'react';
 import SectionHeader from './components/SectionHeader';
 import TutorialCard from './components/TutorialCard';
-import { tutorials } from './data/tutorials';
+import { fallbackCover, tutorials } from './data/tutorials';
 
 const categoryList = ['Fingerstyle', 'Rhythm / Strumming', 'Background Chords'];
+const instrumentOptions = ['All', 'Acoustic Guitar', 'Electric Guitar', 'Piano', 'Bass Guitar'];
 
 export default function App() {
   const [selectedId, setSelectedId] = useState(tutorials[0].id);
+  const [query, setQuery] = useState('');
+  const [difficulty, setDifficulty] = useState<'All' | 'Beginner' | 'Intermediate' | 'Advanced'>('All');
+  const [instrument, setInstrument] = useState('All');
+  const [tuning, setTuning] = useState('All');
+  const [selectedTag, setSelectedTag] = useState('All');
 
-  const selectedTutorial = useMemo(
-    () => tutorials.find((item) => item.id === selectedId) ?? tutorials[0],
-    [selectedId]
+  const filteredTutorials = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
+
+    return tutorials.filter((tutorial) => {
+      const matchesQuery =
+        !normalizedQuery ||
+        tutorial.title.toLowerCase().includes(normalizedQuery) ||
+        tutorial.artist.toLowerCase().includes(normalizedQuery);
+
+      const matchesDifficulty =
+        difficulty === 'All' || tutorial.difficulty === difficulty;
+
+      const matchesInstrument =
+        instrument === 'All' || tutorial.instrument === instrument;
+
+      const matchesTuning =
+        tuning === 'All' || tutorial.tuning === tuning;
+
+      const matchesTag =
+        selectedTag === 'All' || tutorial.tags.includes(selectedTag);
+
+      return matchesQuery && matchesDifficulty && matchesInstrument && matchesTuning && matchesTag;
+    });
+  }, [query, difficulty, instrument, tuning, selectedTag]);
+
+  const selectedTutorial =
+    filteredTutorials.find((item) => item.id === selectedId) ?? filteredTutorials[0] ?? tutorials[0];
+
+  const tuningOptions = Array.from(
+    new Set(tutorials.map((tutorial) => tutorial.tuning))
   );
+
+  const tagOptions = ['All', ...Array.from(new Set(tutorials.flatMap((tutorial) => tutorial.tags)))];
 
   return (
     <div className="min-h-screen bg-stone-950 text-stone-100">
@@ -80,8 +115,11 @@ export default function App() {
             <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900">
               <div className="relative">
                 <img
-                  src={selectedTutorial.cover}
+                  src={selectedTutorial.cover || fallbackCover}
                   alt={selectedTutorial.title}
+                  onError={(event) => {
+                    event.currentTarget.src = fallbackCover;
+                  }}
                   className="h-[420px] w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
@@ -106,107 +144,217 @@ export default function App() {
             description="A clean library of guitar tutorials with key details, song context, and direct access to the original source videos."
           />
 
-          <div className="mt-10 grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
-            <div className="grid gap-6 md:grid-cols-2">
-              {tutorials.map((tutorial) => (
-                <TutorialCard
-                  key={tutorial.id}
-                  tutorial={tutorial}
-                  active={tutorial.id === selectedId}
-                  onSelect={setSelectedId}
+          <div className="mt-8 rounded-2xl border border-slate-800 bg-slate-900 p-4 sm:p-5">
+            <div className="grid gap-4 lg:grid-cols-[1.2fr_0.7fr_0.7fr_0.8fr_0.8fr]">
+              <label className="block">
+                <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
+                  Search
+                </span>
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Search by song or artist"
+                  className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-white outline-none transition focus:border-amber-500"
                 />
-              ))}
-            </div>
+              </label>
 
-            <aside className="rounded-3xl border border-slate-800 bg-slate-900 p-5 sm:p-6">
-              <div className="overflow-hidden rounded-2xl border border-slate-800">
-                <img
-                  src={selectedTutorial.cover}
-                  alt={selectedTutorial.title}
-                  className="h-64 w-full object-cover"
-                />
-              </div>
+              <label className="block">
+                <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
+                  Difficulty
+                </span>
+                <select
+                  value={difficulty}
+                  onChange={(event) =>
+                    setDifficulty(event.target.value as 'All' | 'Beginner' | 'Intermediate' | 'Advanced')
+                  }
+                  className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-white outline-none transition focus:border-amber-500"
+                >
+                  <option value="All">All</option>
+                  <option value="Beginner">Beginner</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+                </select>
+              </label>
 
-              <div className="mt-6">
-                <div className="flex items-center justify-between gap-4">
-                  <p className="text-xs uppercase tracking-[0.22em] text-amber-300">
-                    {selectedTutorial.artist}
-                  </p>
-                  <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-200">
-                    {selectedTutorial.difficulty}
-                  </span>
-                </div>
-
-                <h3 className="mt-4 text-3xl font-semibold text-white">
-                  {selectedTutorial.title}
-                </h3>
-
-                <div className="mt-5 grid gap-3 text-sm text-slate-300 sm:grid-cols-2">
-                  <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                      Tuning
-                    </p>
-                    <p className="mt-2 font-medium text-white">{selectedTutorial.tuning}</p>
-                  </div>
-                  <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                      Format
-                    </p>
-                    <p className="mt-2 font-medium text-white">Tutorial + Video</p>
-                  </div>
-                </div>
-
-                <p className="mt-6 text-sm leading-7 text-slate-300">
-                  {selectedTutorial.description}
-                </p>
-
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {selectedTutorial.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-slate-700 bg-slate-950 px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-slate-300"
-                    >
-                      {tag}
-                    </span>
+              <label className="block">
+                <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
+                  Instrument
+                </span>
+                <select
+                  value={instrument}
+                  onChange={(event) => setInstrument(event.target.value)}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-white outline-none transition focus:border-amber-500"
+                >
+                  {instrumentOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
                   ))}
+                </select>
+              </label>
+
+              <label className="block">
+                <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
+                  Tuning
+                </span>
+                <select
+                  value={tuning}
+                  onChange={(event) => setTuning(event.target.value)}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-white outline-none transition focus:border-amber-500"
+                >
+                  <option value="All">All</option>
+                  {tuningOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label className="block">
+                <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
+                  Category
+                </span>
+                <select
+                  value={selectedTag}
+                  onChange={(event) => setSelectedTag(event.target.value)}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-white outline-none transition focus:border-amber-500"
+                >
+                  {tagOptions.map((tag) => (
+                    <option key={tag} value={tag}>
+                      {tag}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+          </div>
+
+          {filteredTutorials.length === 0 ? (
+            <div className="mt-8 rounded-3xl border border-dashed border-slate-700 bg-slate-900/60 p-10 text-center">
+              <p className="text-xl font-semibold text-white">No tutorials match your filters.</p>
+              <p className="mt-2 text-sm text-slate-400">
+                Try clearing the search or adjusting the difficulty, instrument, tuning, or category.
+              </p>
+            </div>
+          ) : (
+            <div className="mt-10 grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+              <div className="grid gap-6 md:grid-cols-2">
+                {filteredTutorials.map((tutorial) => (
+                  <TutorialCard
+                    key={tutorial.id}
+                    tutorial={tutorial}
+                    active={tutorial.id === selectedTutorial.id}
+                    onSelect={setSelectedId}
+                  />
+                ))}
+              </div>
+
+              <aside className="rounded-3xl border border-slate-800 bg-slate-900 p-5 sm:p-6">
+                <div className="overflow-hidden rounded-2xl border border-slate-800">
+                  <img
+                    src={selectedTutorial.cover || fallbackCover}
+                    alt={selectedTutorial.title}
+                    onError={(event) => {
+                      event.currentTarget.src = fallbackCover;
+                    }}
+                    className="h-64 w-full object-cover"
+                  />
                 </div>
 
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href={selectedTutorial.youtube}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex-1 rounded-full bg-amber-500 px-4 py-3 text-center text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
-                  >
-                    Watch on YouTube
-                  </a>
-                  <a
-                    href={selectedTutorial.tiktok}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex-1 rounded-full border border-slate-700 bg-slate-950 px-4 py-3 text-center text-sm font-semibold text-white transition hover:border-slate-600 hover:bg-slate-800"
-                  >
-                    Open TikTok
-                  </a>
+                <div className="mt-6">
+                  <div className="flex items-center justify-between gap-4">
+                    <p className="text-xs uppercase tracking-[0.22em] text-amber-300">
+                      {selectedTutorial.artist}
+                    </p>
+                    <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-200">
+                      {selectedTutorial.difficulty}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-4 text-3xl font-semibold text-white">
+                    {selectedTutorial.title}
+                  </h3>
+
+                  <div className="mt-5 grid gap-3 text-sm text-slate-300 sm:grid-cols-2">
+                    <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500">
+                        Instrument
+                      </p>
+                      <p className="mt-2 font-medium text-white">{selectedTutorial.instrument}</p>
+                    </div>
+                    <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500">
+                        Tuning
+                      </p>
+                      <p className="mt-2 font-medium text-white">{selectedTutorial.tuning}</p>
+                    </div>
+                  </div>
+
+                  <p className="mt-6 text-sm leading-7 text-slate-300">
+                    {selectedTutorial.description}
+                  </p>
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {selectedTutorial.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-slate-700 bg-slate-950 px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-slate-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                    {selectedTutorial.youtube ? (
+                      <a
+                        href={selectedTutorial.youtube}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-1 rounded-full bg-amber-500 px-4 py-3 text-center text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
+                      >
+                        Watch on YouTube
+                      </a>
+                    ) : null}
+
+                    {selectedTutorial.tiktok ? (
+                      <a
+                        href={selectedTutorial.tiktok}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-1 rounded-full border border-slate-700 bg-slate-950 px-4 py-3 text-center text-sm font-semibold text-white transition hover:border-slate-600 hover:bg-slate-800"
+                      >
+                        Watch on TikTok
+                      </a>
+                    ) : null}
+                  </div>
+
+                  {!selectedTutorial.youtube && !selectedTutorial.tiktok ? (
+                    <div className="mt-5 rounded-xl border border-dashed border-slate-700 bg-slate-950/60 p-4 text-sm text-slate-400">
+                      No external video link has been added for this tutorial yet.
+                    </div>
+                  ) : null}
                 </div>
-              </div>
-            </aside>
-          </div>
+              </aside>
+            </div>
+          )}
         </section>
 
         <section id="about" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 sm:p-8">
             <SectionHeader
               eyebrow="About"
-              title="Every lesson from my TikTok library"
-              description="This website brings together all the guitar tutorials I’ve used across my TikTok videos."
+              title="All of my TikTok tutorials in one place"
+              description="A simple library of the lessons I’ve used across my TikTok videos."
             />
 
             <div className="mt-8 max-w-3xl">
               <p className="text-base leading-7 text-slate-300">
-                This website is a collection of the tutorials I’ve used in my TikTok videos —
-                all in one place so it’s easier to find the lesson, learn the song, and go
-                straight to the original video.
+                This site is basically a collection of the tutorials I’ve used in my TikTok
+                videos. I wanted everything in one place so it’s easier to find a song, learn
+                the arrangement, and jump straight to the original video.
               </p>
             </div>
 
@@ -219,11 +367,11 @@ export default function App() {
                   <p className="text-sm font-semibold text-white">{category}</p>
                   <p className="mt-3 text-sm leading-6 text-slate-300">
                     {category === 'Fingerstyle' &&
-                      'Warm, delicate picking patterns and melodic accompaniment styles.'}
+                      'Clean fingerpicked patterns and melodic accompaniment work.'}
                     {category === 'Rhythm / Strumming' &&
-                      'Groove-based lessons focused on strumming patterns and timing.'}
+                      'Groove-focused lessons built around strumming and timing.'}
                     {category === 'Background Chords' &&
-                      'Chord-based support playing for songs and softer accompanying textures.'}
+                      'Chord-based support playing for softer accompaniment and song flow.'}
                   </p>
                 </div>
               ))}
