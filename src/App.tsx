@@ -3,6 +3,8 @@ import SectionHeader from './components/SectionHeader';
 import TutorialCard from './components/TutorialCard';
 import { tutorials } from './data/tutorials';
 
+const categoryList = ['Fingerstyle', 'Rhythm / Strumming', 'Background Chords'];
+
 export default function App() {
   const [selectedId, setSelectedId] = useState(tutorials[0].id);
 
@@ -32,9 +34,6 @@ export default function App() {
             </a>
             <a href="#about" className="transition hover:text-white">
               About
-            </a>
-            <a href="#footer" className="transition hover:text-white">
-              Contact
             </a>
           </nav>
 
@@ -199,29 +198,35 @@ export default function App() {
           <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 sm:p-8">
             <SectionHeader
               eyebrow="About"
-              title="A home for song-first guitar learning"
-              description="This library is built around practical learning: song-oriented lessons, clean lesson cards, and direct access to the original content without unnecessary clutter."
+              title="Every lesson from my TikTok library"
+              description="This website brings together all the guitar tutorials I’ve used across my TikTok videos."
             />
 
+            <div className="mt-8 max-w-3xl">
+              <p className="text-base leading-7 text-slate-300">
+                This website is a collection of the tutorials I’ve used in my TikTok videos —
+                all in one place so it’s easier to find the lesson, learn the song, and go
+                straight to the original video.
+              </p>
+            </div>
+
             <div className="mt-8 grid gap-6 md:grid-cols-3">
-              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
-                <p className="text-sm font-semibold text-white">Song-driven</p>
-                <p className="mt-3 text-sm leading-6 text-slate-300">
-                  Lessons are organized around recognizable songs, riffs, and performance ideas.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
-                <p className="text-sm font-semibold text-white">Clear details</p>
-                <p className="mt-3 text-sm leading-6 text-slate-300">
-                  Each lesson includes key information like difficulty, tuning, tags, and source links.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
-                <p className="text-sm font-semibold text-white">Built for discovery</p>
-                <p className="mt-3 text-sm leading-6 text-slate-300">
-                  Visitors can browse fast, find the right lesson, and open the original video in one flow.
-                </p>
-              </div>
+              {categoryList.map((category) => (
+                <div
+                  key={category}
+                  className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5"
+                >
+                  <p className="text-sm font-semibold text-white">{category}</p>
+                  <p className="mt-3 text-sm leading-6 text-slate-300">
+                    {category === 'Fingerstyle' &&
+                      'Warm, delicate picking patterns and melodic accompaniment styles.'}
+                    {category === 'Rhythm / Strumming' &&
+                      'Groove-based lessons focused on strumming patterns and timing.'}
+                    {category === 'Background Chords' &&
+                      'Chord-based support playing for songs and softer accompanying textures.'}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -236,12 +241,6 @@ export default function App() {
             </a>
             <a href="#about" className="transition hover:text-white">
               About
-            </a>
-            <a href="https://www.youtube.com" target="_blank" rel="noreferrer" className="transition hover:text-white">
-              YouTube
-            </a>
-            <a href="https://www.tiktok.com" target="_blank" rel="noreferrer" className="transition hover:text-white">
-              TikTok
             </a>
           </div>
         </div>
