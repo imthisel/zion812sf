@@ -1,5 +1,4 @@
-import type { Tutorial } from '../data/tutorials';
-import { fallbackCover } from '../data/tutorials';
+import { fallbackCover, type Tutorial } from '../data/tutorials';
 
 type TutorialCardProps = {
   tutorial: Tutorial;
@@ -16,8 +15,10 @@ export default function TutorialCard({
     <button
       type="button"
       onClick={() => onSelect(tutorial.id)}
+      aria-pressed={active}
       className={[
-        'group w-full overflow-hidden rounded-2xl border bg-slate-900 text-left transition-all duration-200',
+        'group w-full overflow-hidden rounded-2xl border bg-slate-900 text-left transition-all duration-200 ease-out',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950',
         active
           ? 'border-amber-500 shadow-[0_0_0_1px_rgba(245,158,11,0.35)]'
           : 'border-slate-800 hover:border-slate-700'
@@ -46,14 +47,14 @@ export default function TutorialCard({
           <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
             {tutorial.artist}
           </p>
-          <span className="text-xs uppercase tracking-[0.12em] text-slate-500">Lesson</span>
+          <span className="text-xs uppercase tracking-[0.12em] text-slate-500">
+            {tutorial.instrument}
+          </span>
         </div>
 
         <h3 className="text-xl font-semibold text-white">{tutorial.title}</h3>
 
-        <p className="mt-3 text-sm leading-6 text-slate-300">
-          {tutorial.description}
-        </p>
+        <p className="mt-3 text-sm leading-6 text-slate-300">{tutorial.description}</p>
 
         <div className="mt-5 flex flex-wrap gap-2">
           {tutorial.tags.map((tag) => (

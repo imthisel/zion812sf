@@ -3,14 +3,22 @@ import SectionHeader from './components/SectionHeader';
 import TutorialCard from './components/TutorialCard';
 import { fallbackCover, tutorials } from './data/tutorials';
 
-const categoryList = ['Fingerstyle', 'Rhythm / Strumming', 'Background Chords'];
-const instrumentOptions = ['All', 'Acoustic Guitar', 'Electric Guitar', 'Piano', 'Bass Guitar'];
+const categoryList = ['Fingerstyle', 'Rhythm / Strumming', 'Background Chords'] as const;
+const instrumentOptions = [
+  'All',
+  'Acoustic Guitar',
+  'Electric Guitar',
+  'Piano',
+  'Bass Guitar'
+] as const;
+
+type DifficultyFilter = 'All' | 'Beginner' | 'Intermediate' | 'Advanced';
 
 export default function App() {
   const [selectedId, setSelectedId] = useState(tutorials[0].id);
   const [query, setQuery] = useState('');
-  const [difficulty, setDifficulty] = useState<'All' | 'Beginner' | 'Intermediate' | 'Advanced'>('All');
-  const [instrument, setInstrument] = useState('All');
+  const [difficulty, setDifficulty] = useState<DifficultyFilter>('All');
+  const [instrument, setInstrument] = useState<(typeof instrumentOptions)[number]>('All');
   const [tuning, setTuning] = useState('All');
   const [selectedTag, setSelectedTag] = useState('All');
 
@@ -39,18 +47,34 @@ export default function App() {
     });
   }, [query, difficulty, instrument, tuning, selectedTag]);
 
+  const hasActiveFilters =
+    query.trim() !== '' ||
+    difficulty !== 'All' ||
+    instrument !== 'All' ||
+    tuning !== 'All' ||
+    selectedTag !== 'All';
+
   const selectedTutorial =
     filteredTutorials.find((item) => item.id === selectedId) ?? filteredTutorials[0] ?? tutorials[0];
 
-  const tuningOptions = Array.from(
-    new Set(tutorials.map((tutorial) => tutorial.tuning))
-  );
+  const tuningOptions = Array.from(new Set(tutorials.map((tutorial) => tutorial.tuning)));
 
-  const tagOptions = ['All', ...Array.from(new Set(tutorials.flatMap((tutorial) => tutorial.tags)))];
+  const tagOptions = [
+    'All',
+    ...Array.from(new Set(tutorials.flatMap((tutorial) => tutorial.tags)))
+  ];
+
+  const resetFilters = () => {
+    setQuery('');
+    setDifficulty('All');
+    setInstrument('All');
+    setTuning('All');
+    setSelectedTag('All');
+  };
 
   return (
     <div className="min-h-screen bg-stone-950 text-stone-100">
-      <header className="sticky top-0 z-30 border-b border-slate-800/80 bg-stone-950/85 backdrop-blur">
+      <header className="sticky top-0 z-30 border-b border-slate-800/80 bg-stone-950/85 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500 text-base font-black text-slate-950">
@@ -93,7 +117,7 @@ export default function App() {
               </h1>
               <p className="mt-5 max-w-xl text-base leading-7 text-slate-300 sm:text-lg">
                 A focused library for guitar players who want polished lessons, practical
-                breakdowns, and clean access to the original music videos.
+                breakdowns, and easy access to the original music videos.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -141,12 +165,12 @@ export default function App() {
           <SectionHeader
             eyebrow="Library"
             title="Browse guitar lessons by song and style"
-            description="A clean library of guitar tutorials with key details, song context, and direct access to the original source videos."
+            description="A clean library of lesson videos with details that matter: the song, the artist, the instrument, the tuning, and the category."
           />
 
           <div className="mt-8 rounded-2xl border border-slate-800 bg-slate-900 p-4 sm:p-5">
-            <div className="grid gap-4 lg:grid-cols-[1.2fr_0.7fr_0.7fr_0.8fr_0.8fr]">
-              <label className="block">
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+              <label className="block xl:col-span-2">
                 <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
                   Search
                 </span>
@@ -155,6 +179,7 @@ export default function App() {
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   placeholder="Search by song or artist"
+                  aria-label="Search tutorials by song or artist"
                   className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-white outline-none transition focus:border-amber-500"
                 />
               </label>
@@ -165,8 +190,9 @@ export default function App() {
                 </span>
                 <select
                   value={difficulty}
+                  aria-label="Filter by difficulty"
                   onChange={(event) =>
-                    setDifficulty(event.target.value as 'All' | 'Beginner' | 'Intermediate' | 'Advanced')
+                    setDifficulty(event.target.value as DifficultyFilter)
                   }
                   className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-white outline-none transition focus:border-amber-500"
                 >
@@ -183,7 +209,8 @@ export default function App() {
                 </span>
                 <select
                   value={instrument}
-                  onChange={(event) => setInstrument(event.target.value)}
+                  aria-label="Filter by instrument"
+                  onChange={(event) => setInstrument(event.target.value as (typeof instrumentOptions)[number])}
                   className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-white outline-none transition focus:border-amber-500"
                 >
                   {instrumentOptions.map((option) => (
@@ -200,6 +227,7 @@ export default function App() {
                 </span>
                 <select
                   value={tuning}
+                  aria-label="Filter by tuning"
                   onChange={(event) => setTuning(event.target.value)}
                   className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-white outline-none transition focus:border-amber-500"
                 >
@@ -212,12 +240,13 @@ export default function App() {
                 </select>
               </label>
 
-              <label className="block">
+              <label className="block md:col-span-2 xl:col-span-1">
                 <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
                   Category
                 </span>
                 <select
                   value={selectedTag}
+                  aria-label="Filter by category"
                   onChange={(event) => setSelectedTag(event.target.value)}
                   className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-white outline-none transition focus:border-amber-500"
                 >
@@ -229,6 +258,18 @@ export default function App() {
                 </select>
               </label>
             </div>
+
+            {hasActiveFilters ? (
+              <div className="mt-4 flex justify-end">
+                <button
+                  type="button"
+                  onClick={resetFilters}
+                  className="rounded-full border border-slate-700 bg-slate-950 px-3 py-2 text-xs font-medium uppercase tracking-[0.14em] text-slate-300 transition hover:border-slate-500 hover:text-white"
+                >
+                  Clear filters
+                </button>
+              </div>
+            ) : null}
           </div>
 
           {filteredTutorials.length === 0 ? (
