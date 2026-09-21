@@ -24,7 +24,7 @@ export const tutorials: Tutorial[] = [
     tuning: 'Drop D',
     youtube: 'https://www.youtube.com/watch?v=3qmVyCoHqUc',
     tiktok: 'https://www.tiktok.com/@yourhandle/video/1234567890',
-    tags: ['Classic Rock', 'Riff', 'Lead']
+    tags: ['Fingerstyle', 'Rhythm / Strumming', 'Background Chords']
   },
   {
     id: 'dust-in-the-wind',
@@ -38,7 +38,7 @@ export const tutorials: Tutorial[] = [
     tuning: 'Standard E',
     youtube: 'https://www.youtube.com/watch?v=RtBBl6Z_1c8',
     tiktok: 'https://www.tiktok.com/@yourhandle/video/1234567891',
-    tags: ['Acoustic', 'Fingerstyle', 'Beginner']
+    tags: ['Fingerstyle', 'Background Chords']
   },
   {
     id: 'take-it-easy',
@@ -52,7 +52,7 @@ export const tutorials: Tutorial[] = [
     tuning: 'Standard E',
     youtube: 'https://www.youtube.com/watch?v=RudU5Y0T6dY',
     tiktok: 'https://www.tiktok.com/@yourhandle/video/1234567892',
-    tags: ['Acoustic', 'Rhythm', 'Country Rock']
+    tags: ['Rhythm / Strumming', 'Background Chords']
   },
   {
     id: 'wanted-dead-or-alive',
@@ -66,6 +66,6 @@ export const tutorials: Tutorial[] = [
     tuning: 'Standard E',
     youtube: 'https://www.youtube.com/watch?v=9BMwcO6kq0Y',
     tiktok: 'https://www.tiktok.com/@yourhandle/video/1234567893',
-    tags: ['Rock', 'Rhythm', 'Main Riff']
+    tags: ['Rhythm / Strumming', 'Fingerstyle']
   }
 ];
