@@ -56,7 +56,7 @@ export const tutorials: Tutorial[] = [
       'This genuinely hurt my hand to play bruh, this sumn thats supposed to be played in electric',
     difficulty: 'Advanced',
     instrument: 'Acoustic Guitar',
-    tuning: 'Standard E',
+    tuning: 'Standard',
     youtube: 'https://www.youtube.com/watch?v=JvRLYuiyURk&list=RDJvRLYuiyURk&start_radio=1',
     tags: ['Flatpicking']
   },
@@ -69,7 +69,7 @@ export const tutorials: Tutorial[] = [
       'my goat kenneth acoustic',
     difficulty: 'Advanced',
     instrument: 'Acoustic Guitar',
-    tuning: 'Standard E',
+    tuning: 'Standard',
     youtube: 'https://www.youtube.com/watch?v=Gpv0TbNNvdk&list=RDGpv0TbNNvdk&start_radio=1',
     tags: ['Fingerstyle']
   },
@@ -82,7 +82,7 @@ export const tutorials: Tutorial[] = [
       'beabadoobs',
     difficulty: 'Intermediate',
     instrument: 'Acoustic Guitar',
-    tuning: 'Standard E',
+    tuning: 'Standard',
     youtube: 'https://www.youtube.com/watch?v=zOJpmgPAn9A',
     tags: ['Fingerstyle']
   },
@@ -95,7 +95,7 @@ export const tutorials: Tutorial[] = [
       'v catchy',
     difficulty: 'Beginner',
     instrument: 'Electric Guitar',
-    tuning: 'Standard E',
+    tuning: 'Standard',
     tiktok: 'https://vt.tiktok.com/ZSqoRXSNr/',
     tags: ['Rhythm / Strumming']
   },
@@ -108,7 +108,7 @@ export const tutorials: Tutorial[] = [
       'Rex Orange Country',
     difficulty: 'Intermediate',
     instrument: 'Acoustic Guitar',
-    tuning: 'Standard E',
+    tuning: 'Standard',
     youtube: 'https://www.youtube.com/watch?v=C_o2-lvR5nk&list=RDC_o2-lvR5nk&start_radio=1',
     tags: ['Fingerstyle']
   },
@@ -121,7 +121,7 @@ export const tutorials: Tutorial[] = [
       'we luv brent',
     difficulty: 'Intermediate',
     instrument: 'Acoustic Guitar',
-    tuning: 'Standard E',
+    tuning: 'Standard',
     tiktok: ' https://vt.tiktok.com/ZSqo8T6Fo/',
     tags: ['Flatpicking']
   },
@@ -134,7 +134,7 @@ export const tutorials: Tutorial[] = [
       'girllll do u really wanna be my friend or do you really wanna be my lover',
     difficulty: 'Intermediate',
     instrument: 'Acoustic Guitar',
-    tuning: 'Standard E',
+    tuning: 'Standard',
     website: 'https://tabs.ultimate-guitar.com/tab/montell-fish/pretend-lovers-chords-5540373',
     tags: ['Rhythm / Strumming']
   },
@@ -147,7 +147,7 @@ export const tutorials: Tutorial[] = [
       "it's never overrrrrrr anw peak chord progression",
     difficulty: 'Beginner',
     instrument: 'Acoustic Guitar',
-    tuning: 'Standard E',
+    tuning: 'Standard',
     tiktok: 'https://vt.tiktok.com/ZSqoNF7gX/',
     tags: ['Rhythm / Strumming']
   }
@@ -161,7 +161,7 @@ export const tutorials: Tutorial[] = [
       'supposedly electric again but good hand strengthening exercise',
     difficulty: 'Advanced',
     instrument: 'Acoustic Guitar',
-    tuning: 'Standard E',
+    tuning: 'Standard',
     youtube: 'https://www.youtube.com/watch?v=2qjdiPq4AkU',
     tags: ['Fingerstyle']
   }
@@ -175,7 +175,7 @@ export const tutorials: Tutorial[] = [
       '🙍🏿',
     difficulty: 'Beginner',
     instrument: 'Acoustic Guitar',
-    tuning: 'Standard E',
+    tuning: 'Standard',
     youtube: 'https://www.youtube.com/watch?v=9GAjP3a32_4',
     tags: ['Fingerstyle']
   }
@@ -189,7 +189,7 @@ export const tutorials: Tutorial[] = [
       'Beabadoobs again, im sureeeeee nowwwwwwow im sureee ',
     difficulty: 'Intermediate',
     instrument: 'Acoustic Guitar',
-    tuning: 'Standard E',
+    tuning: 'Standard',
     tiktok: 'https://vt.tiktok.com/ZSqoFq3XB/',
     tags: ['Rhythm / Strumming']
   },
@@ -202,7 +202,7 @@ export const tutorials: Tutorial[] = [
       '🍰',
     difficulty: 'Beginner',
     instrument: 'Acoustic Guitar',
-    tuning: 'Standard E',
+    tuning: 'Standard',
     tiktok: 'hhttps://vt.tiktok.com/ZSqoFHvd5/',
     tags: ['Rhythm / Strumming']
   },
@@ -212,10 +212,10 @@ export const tutorials: Tutorial[] = [
     artist: 'Pinegrove',
     cover: '/images/0015.png',
     description:
-      'nothin here to caree abouttt',
+      'nothin here to caree abouttt Note: High E string is half step down. ',
     difficulty: 'Beginner',
     instrument: 'Acoustic Guitar',
-    tuning: 'High E string is half step down (E A D G B eb)',
+    tuning: 'E A D G B eb',
     tiktok: 'https://vt.tiktok.com/ZSqoYhUPS/',
     tags: ['Rhythm / Strumming']
   },
@@ -242,7 +242,7 @@ export const tutorials: Tutorial[] = [
       'at sandali langggggg',
     difficulty: 'Intermediate',
     instrument: 'Bass Guitar',
-    tuning: 'Standard',
+    tuning: 'E A D G',
     youtube: 'https://www.youtube.com/watch?v=VOOFVtVZ4K8',
     tags: ['Fingerstyle']
   },

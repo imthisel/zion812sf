@@ -283,7 +283,7 @@ export default function App() {
           <SectionHeader
             eyebrow="Library"
             title="Browse guitar lessons"
-            description="Use the filters or search below to find the song you’re looking for "
+            description="Use the filters to search the song you’re looking for below"
           />
 
           <div className="mt-8 rounded-[28px] border border-slate-800 bg-slate-900/90 p-4 shadow-2xl shadow-slate-950/40 sm:p-5">
