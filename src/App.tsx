@@ -9,6 +9,7 @@ const categoryList = [
   "Rhythm / Strumming",
   "Flatpicking",
 ] as const;
+
 const instrumentOptions = [
   "All",
   "Acoustic Guitar",
@@ -19,6 +20,106 @@ const instrumentOptions = [
 
 type DifficultyFilter = "All" | "Beginner" | "Intermediate" | "Advanced";
 
+type FilterSelectProps = {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: readonly string[];
+};
+
+type FilterPillGroupProps = {
+  label: string;
+  value: string;
+  options: readonly string[];
+  onChange: (value: string) => void;
+};
+
+function FilterPillGroup({
+  label,
+  value,
+  options,
+  onChange,
+}: FilterPillGroupProps) {
+  return (
+    <div className="space-y-2">
+      <span className="block text-[10px] uppercase tracking-[0.2em] text-slate-400">
+        {label}
+      </span>
+
+      <div className="flex flex-wrap gap-2">
+        {options.map((option) => {
+          const active = option === value;
+
+          return (
+            <button
+              key={option}
+              type="button"
+              onClick={() => onChange(option)}
+              className={`rounded-full border px-3 py-2 text-xs font-medium transition ${
+                active
+                  ? "border-amber-400 bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20"
+                  : "border-slate-700 bg-slate-950/80 text-slate-300 hover:border-slate-500 hover:text-white"
+              }`}
+            >
+              {option}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function FilterSelect({
+  label,
+  value,
+  onChange,
+  options,
+}: FilterSelectProps) {
+  return (
+    <label className="block">
+      <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
+        {label}
+      </span>
+
+      <div className="relative">
+        <select
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          className="w-full appearance-none rounded-2xl border border-slate-700 bg-slate-950/90 px-3 py-3.5 pr-10 text-sm text-white shadow-[0_0_0_1px_rgba(51,65,85,0.8)] transition hover:border-slate-500 focus:border-amber-500 focus:outline-none focus:ring-4 focus:ring-amber-500/15"
+          style={{
+            WebkitAppearance: "none",
+            MozAppearance: "none",
+          }}
+        >
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+
+        <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-slate-400">
+          <svg
+            viewBox="0 0 20 20"
+            fill="none"
+            aria-hidden="true"
+            className="h-4 w-4"
+          >
+            <path
+              d="M5 7.5L10 12.5L15 7.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      </div>
+    </label>
+  );
+}
+
 export default function App() {
   const [activeTutorialId, setActiveTutorialId] = useState<string | null>(null);
   const [query, setQuery] = useState("");
@@ -27,6 +128,7 @@ export default function App() {
     useState<(typeof instrumentOptions)[number]>("All");
   const [tuning, setTuning] = useState("All");
   const [selectedTag, setSelectedTag] = useState("All");
+  const [showFilters, setShowFilters] = useState(false);
 
   const filteredTutorials = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -178,7 +280,7 @@ export default function App() {
             </div>
           </div>
         </section>
-        // ...existing code...
+
         <section
           id="library"
           className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8"
@@ -190,176 +292,83 @@ export default function App() {
           />
 
           <div className="mt-8 rounded-[28px] border border-slate-800 bg-slate-900/90 p-4 shadow-2xl shadow-slate-950/40 sm:p-5">
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-5">
-              <label className="block col-span-2 xl:col-span-2">
-                <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
-                  Search
-                </span>
-                <input
-                  type="text"
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  placeholder="Search by song or artist"
-                  aria-label="Search tutorials by song or artist"
-                  className="w-full rounded-2xl border border-slate-700 bg-slate-950/90 px-3 py-3.5 text-sm text-white shadow-inner shadow-slate-950/50 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
-                />
-              </label>
+            <div className="flex items-center justify-between md:hidden">
+              <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
+                Filters
+              </p>
 
-              <label className="block">
-                <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
-                  Difficulty
-                </span>
-                <div className="relative">
-                  <select
-                    value={difficulty}
-                    aria-label="Filter by difficulty"
-                    onChange={(event) =>
-                      setDifficulty(event.target.value as DifficultyFilter)
-                    }
-                    className="w-full appearance-none rounded-2xl border border-slate-700 bg-slate-950/90 px-3 py-3.5 pr-10 text-sm text-white shadow-inner shadow-slate-950/50 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
-                  >
-                    <option value="All">All</option>
-                    <option value="Beginner">Beginner</option>
-                    <option value="Intermediate">Intermediate</option>
-                    <option value="Advanced">Advanced</option>
-                  </select>
-                  <svg
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    aria-hidden="true"
-                    className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
-                  >
-                    <path
-                      d="M5 7.5L10 12.5L15 7.5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </label>
-
-              <label className="block">
-                <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
-                  Instrument
-                </span>
-                <div className="relative">
-                  <select
-                    value={instrument}
-                    aria-label="Filter by instrument"
-                    onChange={(event) =>
-                      setInstrument(
-                        event.target
-                          .value as (typeof instrumentOptions)[number],
-                      )
-                    }
-                    className="w-full appearance-none rounded-2xl border border-slate-700 bg-slate-950/90 px-3 py-3.5 pr-10 text-sm text-white shadow-inner shadow-slate-950/50 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
-                  >
-                    {instrumentOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                  <svg
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    aria-hidden="true"
-                    className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
-                  >
-                    <path
-                      d="M5 7.5L10 12.5L15 7.5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </label>
-
-              <label className="block">
-                <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
-                  Tuning
-                </span>
-                <div className="relative">
-                  <select
-                    value={tuning}
-                    aria-label="Filter by tuning"
-                    onChange={(event) => setTuning(event.target.value)}
-                    className="w-full appearance-none rounded-2xl border border-slate-700 bg-slate-950/90 px-3 py-3.5 pr-10 text-sm text-white shadow-inner shadow-slate-950/50 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
-                  >
-                    <option value="All">All</option>
-                    {tuningOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                  <svg
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    aria-hidden="true"
-                    className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
-                  >
-                    <path
-                      d="M5 7.5L10 12.5L15 7.5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </label>
-
-              <label className="block md:col-span-2 xl:col-span-1">
-                <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
-                  Category
-                </span>
-                <div className="relative">
-                  <select
-                    value={selectedTag}
-                    aria-label="Filter by category"
-                    onChange={(event) => setSelectedTag(event.target.value)}
-                    className="w-full appearance-none rounded-2xl border border-slate-700 bg-slate-950/90 px-3 py-3.5 pr-10 text-sm text-white shadow-inner shadow-slate-950/50 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
-                  >
-                    {tagOptions.map((tag) => (
-                      <option key={tag} value={tag}>
-                        {tag}
-                      </option>
-                    ))}
-                  </select>
-                  <svg
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    aria-hidden="true"
-                    className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
-                  >
-                    <path
-                      d="M5 7.5L10 12.5L15 7.5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </label>
+              <button
+                type="button"
+                onClick={() => setShowFilters((value) => !value)}
+                className="rounded-full border border-slate-700 bg-slate-950 px-3 py-2 text-[10px] font-medium uppercase tracking-[0.16em] text-slate-300"
+              >
+                {showFilters ? "Hide" : "Show"}
+              </button>
             </div>
 
-            {hasActiveFilters ? (
-              <div className="mt-4 flex justify-end">
-                <button
-                  type="button"
-                  onClick={resetFilters}
-                  className="rounded-full border border-slate-700 bg-slate-950 px-3 py-2 text-[10px] font-medium uppercase tracking-[0.16em] text-slate-300 transition hover:border-slate-500 hover:text-white"
-                >
-                  Clear filters
-                </button>
+            <div className={`${showFilters ? "block" : "hidden md:block"}`}>
+              <div className="mt-4 grid gap-4 md:mt-0 md:grid-cols-2 xl:grid-cols-5">
+                <div className="md:col-span-2 xl:col-span-2">
+                  <FilterPillGroup
+                    label="Difficulty"
+                    value={difficulty}
+                    options={["All", "Beginner", "Intermediate", "Advanced"]}
+                    onChange={(value) => setDifficulty(value as DifficultyFilter)}
+                  />
+                </div>
+
+                <div className="md:col-span-2 xl:col-span-3">
+                  <FilterPillGroup
+                    label="Category"
+                    value={selectedTag}
+                    options={tagOptions}
+                    onChange={setSelectedTag}
+                  />
+                </div>
+
+                <FilterSelect
+                  label="Instrument"
+                  value={instrument}
+                  onChange={(value) =>
+                    setInstrument(value as (typeof instrumentOptions)[number])
+                  }
+                  options={instrumentOptions}
+                />
+
+                <FilterSelect
+                  label="Tuning"
+                  value={tuning}
+                  onChange={setTuning}
+                  options={["All", ...tuningOptions]}
+                />
+
+                <label className="block col-span-2 xl:col-span-2">
+                  <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
+                    Search
+                  </span>
+                  <input
+                    type="text"
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)}
+                    placeholder="Search by song or artist"
+                    aria-label="Search tutorials by song or artist"
+                    className="w-full rounded-2xl border border-slate-700 bg-slate-950/90 px-3 py-3.5 text-sm text-white shadow-[0_0_0_1px_rgba(51,65,85,0.8)] outline-none transition hover:border-slate-500 focus:border-amber-500 focus:ring-4 focus:ring-amber-500/15"
+                  />
+                </label>
               </div>
-            ) : null}
+
+              {hasActiveFilters ? (
+                <div className="mt-4 flex justify-end">
+                  <button
+                    type="button"
+                    onClick={resetFilters}
+                    className="rounded-full border border-slate-700 bg-slate-950 px-3 py-2 text-[10px] font-medium uppercase tracking-[0.16em] text-slate-300 transition hover:border-slate-500 hover:text-white"
+                  >
+                    Clear filters
+                  </button>
+                </div>
+              ) : null}
+            </div>
           </div>
 
           {filteredTutorials.length === 0 ? (
@@ -384,7 +393,7 @@ export default function App() {
             </div>
           )}
         </section>
-        // ...existing code...
+
         <section
           id="about"
           className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8"
@@ -401,11 +410,13 @@ export default function App() {
                 The main reason I made this website is to give credit to those
                 whose tutorials I used to learn the songs in my account. Aside
                 from that, this website was also made to make it easier for
-                everybody to find tutorials for the things I’ve played in guitar and to keep everything
-                organized in one place instead of scattered replies.
+                everybody to find tutorials for the things I’ve played in guitar
+                and to keep everything organized in one place instead of
+                scattered replies.
               </p>
               <p className="text-base leading-7 text-slate-300">
-                It’s also a personal project I built to test and improve my programming skills while strengthening my portfolio 🤠
+                It’s also a personal project I built to test and improve my
+                programming skills while strengthening my portfolio 🤠
               </p>
             </div>
 
@@ -429,73 +440,73 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        <section
+          id="difficulty-guide"
+          className="mx-auto max-w-7xl px-4 py-10 sm:px-4 sm:py-16 lg:px-8"
+        >
+          <SectionHeader
+            eyebrow="Difficulty guide"
+            title="How I decide the difficulty of each lesson"
+            description="This is just a simple way to help you pick the right songs to practice next."
+          />
+
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <div className="rounded-3xl border border-emerald-500/30 bg-emerald-500/10 p-5">
+              <div className="mb-4 inline-flex rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-200">
+                Beginner
+              </div>
+
+              <p className="text-sm leading-7 text-slate-200">
+                Mostly easy strumming, simple chord shapes, and very comfortable
+                fingerpicking.
+              </p>
+
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                <li>• Simple strumming patterns</li>
+                <li>• Easy chord transitions</li>
+                <li>• Light fingerpicking with little movement</li>
+              </ul>
+            </div>
+
+            <div className="rounded-3xl border border-amber-500/30 bg-amber-500/10 p-5">
+              <div className="mb-4 inline-flex rounded-full border border-amber-400/40 bg-amber-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-200">
+                Intermediate
+              </div>
+
+              <p className="text-sm leading-7 text-slate-200">
+                These usually include strumming with more bar chords, plus
+                fingerpicking that is a little more involved but still manageable
+                with practice.
+              </p>
+
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                <li>• More bar chords</li>
+                <li>• Stronger rhythm control</li>
+                <li>• Fingerpicking that feels a bit tougher</li>
+              </ul>
+            </div>
+
+            <div className="rounded-3xl border border-rose-500/30 bg-rose-500/10 p-5">
+              <div className="mb-4 inline-flex rounded-full border border-rose-400/40 bg-rose-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-rose-200">
+                Advanced
+              </div>
+
+              <p className="text-sm leading-7 text-slate-200">
+                These are the songs I personally find hardest to play, like
+                fingerstyle with slaps, harmonics, difficult transitions, and
+                techniques that need more control and precision.
+              </p>
+
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                <li>• Fingerstyle with slaps</li>
+                <li>• Harmonics and advanced textures</li>
+                <li>• Harder patterns and more technical playing</li>
+              </ul>
+            </div>
+          </div>
+        </section>
       </main>
-
-      <section
-        id="difficulty-guide"
-        className="mx-auto max-w-7xl px-4 py-10 sm:px-4 sm:py-16 lg:px-8"
-      >
-        <SectionHeader
-          eyebrow="Difficulty guide"
-          title="How I decide the difficulty of each lesson"
-          description="This is just a simple way to help you pick the right songs to practice next."
-        />
-
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          <div className="rounded-3xl border border-emerald-500/30 bg-emerald-500/10 p-5">
-            <div className="mb-4 inline-flex rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-200">
-              Beginner
-            </div>
-
-            <p className="text-sm leading-7 text-slate-200">
-              Mostly easy strumming, simple chord shapes, and very comfortable
-              fingerpicking.
-            </p>
-
-            <ul className="mt-4 space-y-2 text-sm text-slate-300">
-              <li>• Simple strumming patterns</li>
-              <li>• Easy chord transitions</li>
-              <li>• Light fingerpicking with little movement</li>
-            </ul>
-          </div>
-
-          <div className="rounded-3xl border border-amber-500/30 bg-amber-500/10 p-5">
-            <div className="mb-4 inline-flex rounded-full border border-amber-400/40 bg-amber-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-200">
-              Intermediate
-            </div>
-
-            <p className="text-sm leading-7 text-slate-200">
-              These usually include strumming with more bar chords, plus
-              fingerpicking that is a little more involved but def still
-              manageable with practice.
-            </p>
-
-            <ul className="mt-4 space-y-2 text-sm text-slate-300">
-              <li>• More bar chords</li>
-              <li>• Stronger rhythm control</li>
-              <li>• Fingerpicking that feels a bit tougher</li>
-            </ul>
-          </div>
-
-          <div className="rounded-3xl border border-rose-500/30 bg-rose-500/10 p-5">
-            <div className="mb-4 inline-flex rounded-full border border-rose-400/40 bg-rose-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-rose-200">
-              Advanced
-            </div>
-
-            <p className="text-sm leading-7 text-slate-200">
-              These are the songs I personally find hardest to play, like
-              fingerstyle with slaps, harmonics, difficult transitions, and
-              techniques that need more control and precision.
-            </p>
-
-            <ul className="mt-4 space-y-2 text-sm text-slate-300">
-              <li>• Fingerstyle with slaps</li>
-              <li>• Harmonics and advanced textures</li>
-              <li>• Harder patterns and more technical playing</li>
-            </ul>
-          </div>
-        </div>
-      </section>
 
       <footer id="footer" className="border-t border-slate-800 bg-slate-950">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-8 text-sm text-slate-400 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">

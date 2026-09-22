@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, 'Segoe UI', sans-serif;
+  font-family: Inter, "Segoe UI", sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: #e2e8f0;
@@ -53,4 +53,19 @@ select {
 :focus-visible {
   outline: 2px solid rgba(251, 191, 36, 0.9);
   outline-offset: 2px;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select option {
+  background: #020617;
+  color: #f8fafc;
 }
