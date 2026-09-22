@@ -5,14 +5,15 @@ export type Tutorial = {
   id: string;
   title: string;
   artist: string;
-  cover: string;
-  description: string;
-  difficulty: Difficulty;
-  instrument: Instrument;
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  instrument: 'Acoustic Guitar' | 'Electric Guitar' | 'Piano' | 'Bass Guitar';
   tuning: string;
+  tags: string[];
+  cover?: string;
+  description: string;
   youtube?: string;
   tiktok?: string;
-  tags: string[];
+  website?: string;
 };
 
 export const fallbackCover =
@@ -20,86 +21,110 @@ export const fallbackCover =
 
 export const tutorials: Tutorial[] = [
   {
-    id: 'black-hole-sun',
-    title: 'Black Hole Sun',
-    artist: 'Soundgarden',
-    cover: '/images/tutorials/black-hole-sun.jpg',
+    id: 'just-the-two-of-us',
+    title: 'Just the Two of Us',
+    artist: 'Grover Washing ton, Jr., Bill Withers',
+    cover: '/images/0001.png',
     description:
-      'A clean breakdown of the main riff and lead phrasing with emphasis on timing, muted picking, and melodic phrasing.',
-    difficulty: 'Intermediate',
-    instrument: 'Electric Guitar',
-    tuning: 'Drop D',
-    youtube: 'https://www.youtube.com/watch?v=3qmVyCoHqUc',
-    tiktok: 'https://www.tiktok.com/@yourhandle/video/1234567890',
-    tags: ['Fingerstyle', 'Rhythm / Strumming', 'Flatpicking']
-  },
-  {
-    id: 'dust-in-the-wind',
-    title: 'Dust in the Wind',
-    artist: 'Kansas',
-    cover: '/images/tutorials/dust-in-the-wind.jpg',
-    description:
-      'A fingerstyle-friendly arrangement focused on chord clarity, restraint, and dynamics for a more expressive performance.',
-    difficulty: 'Beginner',
+      'First ever post',
+    difficulty: 'Advanced',
     instrument: 'Acoustic Guitar',
-    tuning: 'Standard E',
-    youtube: 'https://www.youtube.com/watch?v=RtBBl6Z_1c8',
-    tiktok: 'https://www.tiktok.com/@yourhandle/video/1234567891',
-    tags: ['Fingerstyle', 'Rhythm / Strumming']
-  },
-  {
-    id: 'take-it-easy',
-    title: 'Take It Easy',
-    artist: 'Eagles',
-    cover: '/images/tutorials/take-it-easy.jpg',
-    description:
-      'A rhythm-first lesson built around laid-back strumming, groove control, and chord transitions that feel natural and relaxed.',
-    difficulty: 'Beginner',
-    instrument: 'Acoustic Guitar',
-    tuning: 'Standard E',
-    youtube: 'https://www.youtube.com/watch?v=RudU5Y0T6dY',
-    tiktok: 'https://www.tiktok.com/@yourhandle/video/1234567892',
-    tags: ['Rhythm / Strumming']
-  },
-  {
-    id: 'wanted-dead-or-alive',
-    title: 'Wanted Dead or Alive',
-    artist: 'Bon Jovi',
-    cover: '/images/tutorials/wanted-dead-or-alive.jpg',
-    description:
-      'A practical breakdown of the iconic intro and rhythm work, with attention to pick attack, movement, and tonal control.',
-    difficulty: 'Intermediate',
-    instrument: 'Electric Guitar',
-    tuning: 'Standard E',
-    youtube: 'https://www.youtube.com/watch?v=9BMwcO6kq0Y',
-    tiktok: 'https://www.tiktok.com/@yourhandle/video/1234567893',
-    tags: ['Rhythm / Strumming', 'Flatpicking']
-  },
-  {
-    id: 'fast-car',
-    title: 'Fast Car',
-    artist: 'Tracy Chapman',
-    cover: '/images/tutorials/fast-car.jpg',
-    description:
-      'A compact acoustic lesson focused on chord movement, the vocal rhythm, and a clean, steady picking feel.',
-    difficulty: 'Beginner',
-    instrument: 'Acoustic Guitar',
-    tuning: 'Standard E',
-    youtube: 'https://www.youtube.com/watch?v=6OQHwQ4PV2E',
-    tiktok: 'https://www.tiktok.com/@yourhandle/video/1234567894',
+    tuning: 'Standard',
+    youtube: 'https://www.youtube.com/watch?v=2SnwOmYZ84E&list=RD2SnwOmYZ84E&start_radio=1',
     tags: ['Fingerstyle']
   },
   {
-    id: 'sultans-of-swing',
-    title: 'Sultans of Swing',
-    artist: 'Dire Straits',
-    cover: '/images/tutorials/sultans-of-swing.jpg',
+    id: 'every-breath-you-yake',
+    title: 'Every Breath You Take',
+    artist: 'The Police',
+    cover: '/images/0002.png',
     description:
-      'A rhythm and lead lesson built around melodic phrasing, syncopation, and a light but articulate tone.',
+      'This genuinely hurt my hand to play bruh, this sumn thats supposed to be played in electric',
+    difficulty: 'Advanced',
+    instrument: 'Acoustic Guitar',
+    tuning: 'Standard E',
+    youtube: 'https://www.youtube.com/watch?v=JvRLYuiyURk&list=RDJvRLYuiyURk&start_radio=1',
+    tags: ['Flatpicking']
+  },
+  {
+    id: 'risk-it-all',
+    title: 'Risk It All',
+    artist: 'Bruno Mars',
+    cover: '/images/0003.png',
+    description:
+      'my goat kenneth acoustic',
+    difficulty: 'Advanced',
+    instrument: 'Acoustic Guitar',
+    tuning: 'Standard E',
+    youtube: 'https://www.youtube.com/watch?v=Gpv0TbNNvdk&list=RDGpv0TbNNvdk&start_radio=1',
+    tags: ['Fingerstyle']
+  },
+  {
+    id: 'the-perfect-pair',
+    title: 'The Perfect Pair',
+    artist: 'Beabadoobee',
+    cover: '/images/0005.png',
+    description:
+      'beabadoobs',
     difficulty: 'Intermediate',
+    instrument: 'Acoustic Guitar',
+    tuning: 'Standard E',
+    youtube: 'https://www.youtube.com/watch?v=zOJpmgPAn9A',
+    tags: ['Fingerstyle']
+  },
+  {
+    id: 'looking-out-for-you',
+    title: 'Looking Out For You',
+    artist: 'Joy Again',
+    cover: '/images/0006.png',
+    description:
+      'v catchy',
+    difficulty: 'Beginner',
     instrument: 'Electric Guitar',
     tuning: 'Standard E',
-    youtube: 'https://www.youtube.com/watch?v=9VwXQHAKxig',
-    tags: ['Rhythm / Strumming', 'Fingerstyle']
+    tiktok: 'https://vt.tiktok.com/ZSqoRXSNr/',
+    tags: ['Rhythm / Strumming']
+  },
+    {
+    id: 'pluto-projector',
+    title: 'Pluto Projector',
+    artist: 'Rex Orange County',
+    cover: '/images/007.png',
+    description:
+      'Rex Orange Country',
+    difficulty: 'Intermediate',
+    instrument: 'Acoustic Guitar',
+    tuning: 'Standard E',
+    youtube: 'https://www.youtube.com/watch?v=C_o2-lvR5nk&list=RDC_o2-lvR5nk&start_radio=1',
+    tags: ['Fingerstyle']
+  },
+  {
+    id: 'rehab',
+    title: 'Rehab (Winter in Paris)',
+    artist: 'Brent Faiyaz',
+    cover: '/images/0008.png',
+    description:
+      'we luv brent',
+    difficulty: 'Intermediate',
+    instrument: 'Acoustic Guitar',
+    tuning: 'Standard E',
+    tiktok: ' https://vt.tiktok.com/ZSqo8T6Fo/',
+    tags: ['Fingerstyle']
+  },
+  {
+    id: 'pretend-lovers',
+    title: 'Pretend Lovers',
+    artist: 'Montell Fish',
+    cover: '/images/0009.png',
+    description:
+      'girllll do u really wanna be my friend or do you really wanna be my lover',
+    difficulty: 'Intermediate',
+    instrument: 'Acoustic Guitar',
+    tuning: 'Standard E',
+    youtube: 'https://www.youtube.com/watch?v=C_o2-lvR5nk&list=RDC_o2-lvR5nk&start_radio=1',
+    tags: ['Rhythm / Strumming']
   }
+  ,
+
+
 ];

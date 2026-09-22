@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import SectionHeader from './components/SectionHeader';
 import TutorialCard from './components/TutorialCard';
+import TutorialModal from './components/TutorialModal';
 import { fallbackCover, tutorials } from './data/tutorials';
 
 const categoryList = ['Fingerstyle', 'Rhythm / Strumming', 'Flatpicking'] as const;
@@ -15,7 +16,7 @@ const instrumentOptions = [
 type DifficultyFilter = 'All' | 'Beginner' | 'Intermediate' | 'Advanced';
 
 export default function App() {
-  const [selectedId, setSelectedId] = useState(tutorials[0].id);
+  const [activeTutorialId, setActiveTutorialId] = useState<string | null>(null);
   const [query, setQuery] = useState('');
   const [difficulty, setDifficulty] = useState<DifficultyFilter>('All');
   const [instrument, setInstrument] = useState<(typeof instrumentOptions)[number]>('All');
@@ -54,8 +55,9 @@ export default function App() {
     tuning !== 'All' ||
     selectedTag !== 'All';
 
-  const selectedTutorial =
-    filteredTutorials.find((item) => item.id === selectedId) ?? filteredTutorials[0] ?? tutorials[0];
+  const featuredTutorial = tutorials[0];
+
+  const activeTutorial = tutorials.find((item) => item.id === activeTutorialId) ?? null;
 
   const tuningOptions = Array.from(new Set(tutorials.map((tutorial) => tutorial.tuning)));
 
@@ -75,13 +77,13 @@ export default function App() {
   return (
     <div className="min-h-screen bg-stone-950 text-stone-100">
       <header className="sticky top-0 z-30 border-b border-slate-800/80 bg-stone-950/85 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500 text-base font-black text-slate-950">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4 lg:px-8">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-500 text-base font-black text-slate-950 sm:h-10 sm:w-10">
               Z
             </div>
             <div>
-              <p className="text-sm font-medium uppercase tracking-[0.25em] text-slate-300">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-300 sm:text-sm sm:tracking-[0.25em]">
                 Zion812sf
               </p>
             </div>
@@ -98,7 +100,7 @@ export default function App() {
 
           <a
             href="#library"
-            className="rounded-full border border-amber-500/40 bg-amber-500/10 px-4 py-2 text-sm font-medium text-amber-300 transition hover:border-amber-400 hover:bg-amber-500 hover:text-slate-950"
+            className="shrink-0 whitespace-nowrap rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-xs font-medium text-amber-300 transition hover:border-amber-400 hover:bg-amber-500 hover:text-slate-950 sm:px-4 sm:text-sm"
           >
             Browse lessons
           </a>
@@ -106,18 +108,17 @@ export default function App() {
       </header>
 
       <main>
-        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div>
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-amber-400">
-                Guitar tutorials
+                Zion 812sf Complete Guitar Tutorials
               </p>
               <h1 className="max-w-xl text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                Learn real songs, riffs, and rhythm with clarity.
+                Learn How to Play All the Songs in my Tiktok Account
               </h1>
               <p className="mt-5 max-w-xl text-base leading-7 text-slate-300 sm:text-lg">
-                A focused library for guitar players who want polished lessons, practical
-                breakdowns, and easy access to the original music videos.
+                A complete free library for all those who are asking for tutorials 🙂
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -136,41 +137,42 @@ export default function App() {
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900">
+            <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 sm:rounded-3xl">
               <div className="relative">
                 <img
-                  src={selectedTutorial.cover || fallbackCover}
-                  alt={selectedTutorial.title}
+                  src={featuredTutorial.cover || fallbackCover}
+                  alt={featuredTutorial.title}
+                  decoding="async"
                   onError={(event) => {
                     event.currentTarget.src = fallbackCover;
                   }}
-                  className="h-[420px] w-full object-cover"
+                  className="h-64 w-full object-cover sm:h-80 lg:h-[420px]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
                   <p className="text-xs uppercase tracking-[0.22em] text-amber-300">
                     Featured lesson
                   </p>
-                  <h2 className="mt-2 text-2xl font-semibold text-white">
-                    {selectedTutorial.title}
+                  <h2 className="mt-2 text-xl font-semibold text-white sm:text-2xl">
+                    {featuredTutorial.title}
                   </h2>
-                  <p className="mt-2 text-sm text-slate-200">{selectedTutorial.artist}</p>
+                  <p className="mt-2 text-sm text-slate-200">{featuredTutorial.artist}</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="library" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <section id="library" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
           <SectionHeader
             eyebrow="Library"
             title="Browse guitar lessons by song and style"
-            description="A clean library of lesson videos with details that matter: the song, the artist, the instrument, the tuning, and the category."
+            description="Find the right guitar lesson faster with a library organized by song, artist, style, tuning, and instrument. "
           />
 
           <div className="mt-8 rounded-2xl border border-slate-800 bg-slate-900 p-4 sm:p-5">
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-              <label className="block xl:col-span-2">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-5">
+              <label className="block col-span-2 xl:col-span-2">
                 <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
                   Search
                 </span>
@@ -280,110 +282,19 @@ export default function App() {
               </p>
             </div>
           ) : (
-            <div className="mt-10 grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
-              <div className="grid gap-6 md:grid-cols-2">
-                {filteredTutorials.map((tutorial) => (
-                  <TutorialCard
-                    key={tutorial.id}
-                    tutorial={tutorial}
-                    active={tutorial.id === selectedTutorial.id}
-                    onSelect={setSelectedId}
-                  />
-                ))}
-              </div>
-
-              <aside className="rounded-3xl border border-slate-800 bg-slate-900 p-5 sm:p-6">
-                <div className="overflow-hidden rounded-2xl border border-slate-800">
-                  <img
-                    src={selectedTutorial.cover || fallbackCover}
-                    alt={selectedTutorial.title}
-                    onError={(event) => {
-                      event.currentTarget.src = fallbackCover;
-                    }}
-                    className="h-64 w-full object-cover"
-                  />
-                </div>
-
-                <div className="mt-6">
-                  <div className="flex items-center justify-between gap-4">
-                    <p className="text-xs uppercase tracking-[0.22em] text-amber-300">
-                      {selectedTutorial.artist}
-                    </p>
-                    <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-200">
-                      {selectedTutorial.difficulty}
-                    </span>
-                  </div>
-
-                  <h3 className="mt-4 text-3xl font-semibold text-white">
-                    {selectedTutorial.title}
-                  </h3>
-
-                  <div className="mt-5 grid gap-3 text-sm text-slate-300 sm:grid-cols-2">
-                    <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                        Instrument
-                      </p>
-                      <p className="mt-2 font-medium text-white">{selectedTutorial.instrument}</p>
-                    </div>
-                    <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                        Tuning
-                      </p>
-                      <p className="mt-2 font-medium text-white">{selectedTutorial.tuning}</p>
-                    </div>
-                  </div>
-
-                  <p className="mt-6 text-sm leading-7 text-slate-300">
-                    {selectedTutorial.description}
-                  </p>
-
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {selectedTutorial.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-slate-700 bg-slate-950 px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-slate-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                    {selectedTutorial.youtube ? (
-                      <a
-                        href={selectedTutorial.youtube}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex-1 rounded-full bg-amber-500 px-4 py-3 text-center text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
-                      >
-                        Watch on YouTube
-                      </a>
-                    ) : null}
-
-                    {selectedTutorial.tiktok ? (
-                      <a
-                        href={selectedTutorial.tiktok}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex-1 rounded-full border border-slate-700 bg-slate-950 px-4 py-3 text-center text-sm font-semibold text-white transition hover:border-slate-600 hover:bg-slate-800"
-                      >
-                        Watch on TikTok
-                      </a>
-                    ) : null}
-                  </div>
-
-                  {!selectedTutorial.youtube && !selectedTutorial.tiktok ? (
-                    <div className="mt-5 rounded-xl border border-dashed border-slate-700 bg-slate-950/60 p-4 text-sm text-slate-400">
-                      No external video link has been added for this tutorial yet.
-                    </div>
-                  ) : null}
-                </div>
-              </aside>
+            <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4 xl:grid-cols-5">
+              {filteredTutorials.map((tutorial) => (
+                <TutorialCard
+                  key={tutorial.id}
+                  tutorial={tutorial}
+                  onSelect={setActiveTutorialId}
+                />
+              ))}
             </div>
           )}
         </section>
 
-        <section id="about" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <section id="about" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
           <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 sm:p-8">
             <SectionHeader
               eyebrow="About"
@@ -393,7 +304,7 @@ export default function App() {
 
             <div className="mt-8 max-w-3xl space-y-4">
               <p className="text-base leading-7 text-slate-300">
-                This website was made to make it easier for everybody to play the things I’ve
+                The main reason for this website is to give credit to those whose tutorials I used to learn the songs in my account. Aside from that, this website was also made to make it easier for everybody to play the things I’ve
                 played, and to keep everything organized in one place instead of scattered
                 replies in the comments.
               </p>
@@ -438,6 +349,8 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      <TutorialModal tutorial={activeTutorial} onClose={() => setActiveTutorialId(null)} />
     </div>
   );
 }
