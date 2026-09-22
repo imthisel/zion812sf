@@ -70,12 +70,7 @@ function FilterPillGroup({
   );
 }
 
-function FilterSelect({
-  label,
-  value,
-  onChange,
-  options,
-}: FilterSelectProps) {
+function FilterSelect({ label, value, onChange, options }: FilterSelectProps) {
   return (
     <label className="block">
       <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
@@ -287,8 +282,8 @@ export default function App() {
         >
           <SectionHeader
             eyebrow="Library"
-            title="Browse guitar lessons by song and style"
-            description="Find the right guitar lesson faster with a library organized by song, artist, style, tuning, and instrument."
+            title="Browse guitar lessons"
+            description="Use the filters or search below to find the song you’re looking for "
           />
 
           <div className="mt-8 rounded-[28px] border border-slate-800 bg-slate-900/90 p-4 shadow-2xl shadow-slate-950/40 sm:p-5">
@@ -313,7 +308,9 @@ export default function App() {
                     label="Difficulty"
                     value={difficulty}
                     options={["All", "Beginner", "Intermediate", "Advanced"]}
-                    onChange={(value) => setDifficulty(value as DifficultyFilter)}
+                    onChange={(value) =>
+                      setDifficulty(value as DifficultyFilter)
+                    }
                   />
                 </div>
 
@@ -419,24 +416,48 @@ export default function App() {
                 programming skills while strengthening my portfolio 🤠
               </p>
             </div>
+          </div>
+        </section>
 
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {categoryList.map((category) => (
-                <div
-                  key={category}
-                  className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5"
-                >
-                  <p className="text-sm font-semibold text-white">{category}</p>
-                  <p className="mt-3 text-sm leading-6 text-slate-300">
-                    {category === "Fingerstyle" &&
-                      "Playing the strings with your fingers instead of a pick."}
-                    {category === "Rhythm / Strumming" &&
-                      "Just strumming chords either with a pick or just the hand."}
-                    {category === "Flatpicking" &&
-                      "Picking individual notes and riffs with a guitar pick."}
-                  </p>
-                </div>
-              ))}
+        <section
+          id="playing-styles"
+          className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8"
+        >
+          <SectionHeader
+            eyebrow="Playing styles"
+            title="The different style categories"
+            description="A quick guide to the main guitar techniques so you can use the filters to find lessons to your liking."
+          />
+
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <div className="rounded-3xl border border-slate-700 bg-slate-900/70 p-5">
+              <div className="mb-4 inline-flex rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
+                Fingerstyle
+              </div>
+
+              <p className="text-sm leading-7 text-slate-200">
+                Playing the strings with your fingers instead of a pick. Also called plucking. 
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-slate-700 bg-slate-900/70 p-5">
+              <div className="mb-4 inline-flex rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
+                Rhythm / Strumming
+              </div>
+
+              <p className="text-sm leading-7 text-slate-200">
+                Just strumming chords either with a pick or just the hand.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-slate-700 bg-slate-900/70 p-5">
+              <div className="mb-4 inline-flex rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
+                Flatpicking
+              </div>
+
+              <p className="text-sm leading-7 text-slate-200">
+                Picking individual notes and riffs with a guitar pick.
+              </p>
             </div>
           </div>
         </section>
@@ -475,15 +496,15 @@ export default function App() {
               </div>
 
               <p className="text-sm leading-7 text-slate-200">
-                These usually include strumming with more bar chords, plus
-                fingerpicking that is a little more involved but still manageable
-                with practice.
+                These usually include strumming with more bar chords plus
+                fingerpicking that is a little more involved but def still
+                manageable with practice.
               </p>
 
               <ul className="mt-4 space-y-2 text-sm text-slate-300">
                 <li>• More bar chords</li>
                 <li>• Stronger rhythm control</li>
-                <li>• Fingerpicking that feels a bit tougher</li>
+                <li>• Fingerpicking that feels a bit "tougher"</li>
               </ul>
             </div>
 
@@ -493,15 +514,16 @@ export default function App() {
               </div>
 
               <p className="text-sm leading-7 text-slate-200">
-                These are the songs I personally find hardest to play, like
-                fingerstyle with slaps, harmonics, difficult transitions, and
-                techniques that need more control and precision.
+                These are the songs I personally find the hardest and least
+                comfortable to play like fingerstyle with slaps, harmonics,
+                difficult transitions, and j techniques that needs more control
+                and precision.
               </p>
 
               <ul className="mt-4 space-y-2 text-sm text-slate-300">
                 <li>• Fingerstyle with slaps</li>
-                <li>• Harmonics and advanced textures</li>
-                <li>• Harder patterns and more technical playing</li>
+                <li>• Harmonicss</li>
+                <li>• Harder patterns</li>
               </ul>
             </div>
           </div>
