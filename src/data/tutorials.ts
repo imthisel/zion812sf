@@ -53,7 +53,7 @@ export const tutorials: Tutorial[] = [
     artist: 'The Police',
     cover: '/images/0002.png',
     description:
-      'This genuinely hurt my hand to play bruh, this sumn thats supposed to be played in electric',
+      'This genuinely hurt my hand to play bruh, this sumn you supposed to play on electric',
     difficulty: 'Advanced',
     instrument: 'Acoustic Guitar',
     tuning: 'Standard',

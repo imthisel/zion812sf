@@ -222,7 +222,7 @@ export default function App() {
           <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div>
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-amber-400">
-                Zion812sf's Complete Guitar Tutorials
+                Zion812sf's Complete Source for Guitar Tutorials
               </p>
               <h1 className="max-w-xl text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
                 Learn How to Play All the Songs in my Tiktok Account
