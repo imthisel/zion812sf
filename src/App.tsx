@@ -118,7 +118,7 @@ export default function App() {
                 Learn How to Play All the Songs in my Tiktok Account
               </h1>
               <p className="mt-5 max-w-xl text-base leading-7 text-slate-300 sm:text-lg">
-                A complete free library for all those who are asking for tutorials 🙂
+                A completely free library for all those who are asking for tutorials 🙂
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -304,7 +304,7 @@ export default function App() {
 
             <div className="mt-8 max-w-3xl space-y-4">
               <p className="text-base leading-7 text-slate-300">
-                The main reason for this website is to give credit to those whose tutorials I used to learn the songs in my account. Aside from that, this website was also made to make it easier for everybody to play the things I’ve
+                The main reason I made this website is to give credit to those whose tutorials I used to learn the songs in my account. Aside from that, this website was also made to make it easier for everybody to play the things I’ve
                 played, and to keep everything organized in one place instead of scattered
                 replies in the comments.
               </p>
@@ -335,6 +335,68 @@ export default function App() {
           </div>
         </section>
       </main>
+
+        <section id="difficulty-guide" className="mx-auto max-w-7xl px-4 py-10 sm:px-4 sm:py-16 lg:px-8">
+          <SectionHeader
+            eyebrow="Difficulty guide"
+            title="How I decide the difficulty of each lesson"
+            description="This is just a simple way to help you pick the right songs to practice next."
+          />
+
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <div className="rounded-3xl border border-emerald-500/30 bg-emerald-500/10 p-5">
+              <div className="mb-4 inline-flex rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-200">
+                Beginner
+              </div>
+
+              <p className="text-sm leading-7 text-slate-200">
+                Mostly easy strumming, simple chord shapes, and very comfortable fingerpicking.
+
+              </p>
+
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                <li>• Simple strumming patterns</li>
+                <li>• Easy chord transitions</li>
+                <li>• Light fingerpicking with little movement</li>
+              </ul>
+            </div>
+
+            <div className="rounded-3xl border border-amber-500/30 bg-amber-500/10 p-5">
+              <div className="mb-4 inline-flex rounded-full border border-amber-400/40 bg-amber-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-200">
+                Intermediate
+              </div>
+
+              <p className="text-sm leading-7 text-slate-200">
+                These usually include strumming with more bar chords, plus fingerpicking that is
+                a little more involved but def still manageable with practice.
+              </p>
+
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                <li>• More bar chords</li>
+                <li>• Stronger rhythm control</li>
+                <li>• Fingerpicking that feels a bit tougher</li>
+              </ul>
+            </div>
+
+            <div className="rounded-3xl border border-rose-500/30 bg-rose-500/10 p-5">
+              <div className="mb-4 inline-flex rounded-full border border-rose-400/40 bg-rose-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-rose-200">
+                Advanced
+              </div>
+
+              <p className="text-sm leading-7 text-slate-200">
+                These are the songs I personally find hardest to play, like fingerstyle with slaps,
+                harmonics, difficult transitions, and techniques that need more control and precision.
+              </p>
+
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                <li>• Fingerstyle with slaps</li>
+                <li>• Harmonics and advanced textures</li>
+                <li>• Harder patterns and more technical playing</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      
 
       <footer id="footer" className="border-t border-slate-800 bg-slate-950">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-8 text-sm text-slate-400 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">

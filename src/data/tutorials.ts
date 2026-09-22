@@ -20,6 +20,20 @@ export const fallbackCover =
   'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=80';
 
 export const tutorials: Tutorial[] = [
+  
+  {
+    id: 'i-like-you-so-much-youll-know-it',
+    title: 'I Like You So Much Youll Know It',
+    artist: 'Ysabelle Cuevas',
+    cover: '/images/0022.png',
+    description:
+      'dont forget to support his channel 🙏',
+    difficulty: 'Intermediate',
+    instrument: 'Electric Guitar',
+    tuning: 'Standard',
+    youtube: 'https://www.youtube.com/watch?v=3RkTJlb1x_E',
+    tags: ['Fingerstyle']
+  },
   {
     id: 'just-the-two-of-us',
     title: 'Just the Two of Us',
@@ -149,7 +163,7 @@ export const tutorials: Tutorial[] = [
     instrument: 'Acoustic Guitar',
     tuning: 'Standard E',
     youtube: 'https://www.youtube.com/watch?v=2qjdiPq4AkU',
-    tags: ['Rhythm / Strumming']
+    tags: ['Fingerstyle']
   }
   ,
   {
@@ -163,7 +177,7 @@ export const tutorials: Tutorial[] = [
     instrument: 'Acoustic Guitar',
     tuning: 'Standard E',
     youtube: 'https://www.youtube.com/watch?v=9GAjP3a32_4',
-    tags: ['Rhythm / Strumming']
+    tags: ['Fingerstyle']
   }
   ,
   {
@@ -204,8 +218,74 @@ export const tutorials: Tutorial[] = [
     tuning: 'High E string is half step down (E A D G B eb)',
     tiktok: 'https://vt.tiktok.com/ZSqoYhUPS/',
     tags: ['Rhythm / Strumming']
-  }
-
+  },
+ 
+    {
+    id: 'disillusioned',
+    title: 'Disillusioned',
+    artist: 'Daniel Caesar',
+    cover: '/images/0016.png',
+    description:
+      'AND IIIIMMMMMMM',
+    difficulty: 'Beginner',
+    instrument: 'Bass Guitar',
+    tuning: 'Standard',
+    website: 'https://www.songsterr.com/a/wsa/daniel-caesar-disillusioned-bass-tab-s3005745',
+    tags: ['Fingerstyle']
+  },
+   {
+    id: 'tensionado',
+    title: 'Tensionado',
+    artist: 'Soapdish',
+    cover: '/images/0017.png',
+    description:
+      'at sandali langggggg',
+    difficulty: 'Intermediate',
+    instrument: 'Bass Guitar',
+    tuning: 'Standard',
+    youtube: 'https://www.youtube.com/watch?v=VOOFVtVZ4K8',
+    tags: ['Fingerstyle']
+  },
+   {
+    id: 'sweet-boy',
+    title: 'Sweet boy',
+    artist: 'Malcolm Todd',
+    cover: '/images/0018.png',
+    description:
+      'can we go home nowwww',
+    difficulty: 'Beginner',
+    instrument: 'Electric Guitar',
+    tuning: 'Standard',
+    website: 'https://tabs.ultimate-guitar.com/tab/malcolm-todd/sweet-boy-chords-5368449',
+    tags: ['Rhythm / Strumming']
+  },
+    {
+    id: 'wherever-you-will-go',
+    title: 'Wherever You Will Go',
+    artist: 'The Calling',
+    cover: '/images/0019.png',
+    description:
+      'unc song, if i coulddd then I woulddd. Lowkey j tried plugging the acoustic guitar to the amp here',
+    difficulty: 'Intermediate',
+    instrument: 'Acoustic Guitar',
+    tuning: 'Standard',
+    youtube: 'https://www.youtube.com/watch?v=26Q9Xpthj_s',
+    tags: ['Flatpicking']
+  },
+     {
+    id: 'kabisado',
+    title: 'Kabisado',
+    artist: 'IV OF SPADES',
+    cover: '/images/0020.png',
+    description:
+      'Kabisadoooo ko naa ang tamis ng iyong labiiii kabisadooooooooo ko na',
+    difficulty: 'Intermediate',
+    instrument: 'Electric Guitar',
+    tuning: 'Standard',
+    tiktok: 'https://vt.tiktok.com/ZSqo2txLD/',
+    tags: ['Flatpicking']
+  },
+    
 
 
 ];
