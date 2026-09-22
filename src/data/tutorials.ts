@@ -89,7 +89,7 @@ export const tutorials: Tutorial[] = [
     id: 'pluto-projector',
     title: 'Pluto Projector',
     artist: 'Rex Orange County',
-    cover: '/images/007.png',
+    cover: '/images/0007.png',
     description:
       'Rex Orange Country',
     difficulty: 'Intermediate',
@@ -109,7 +109,7 @@ export const tutorials: Tutorial[] = [
     instrument: 'Acoustic Guitar',
     tuning: 'Standard E',
     tiktok: ' https://vt.tiktok.com/ZSqo8T6Fo/',
-    tags: ['Fingerstyle']
+    tags: ['Flatpicking']
   },
   {
     id: 'pretend-lovers',
@@ -121,10 +121,91 @@ export const tutorials: Tutorial[] = [
     difficulty: 'Intermediate',
     instrument: 'Acoustic Guitar',
     tuning: 'Standard E',
-    youtube: 'https://www.youtube.com/watch?v=C_o2-lvR5nk&list=RDC_o2-lvR5nk&start_radio=1',
+    website: 'https://tabs.ultimate-guitar.com/tab/montell-fish/pretend-lovers-chords-5540373',
+    tags: ['Rhythm / Strumming']
+  },
+   {
+    id: 'lover-you-shouldve-come-over',
+    title: "Lover, You Should've Come Over",
+    artist: 'Jeff Buckley',
+    cover: '/images/0010.png',
+    description:
+      "it's never overrrrrrr anw peak chord progression",
+    difficulty: 'Beginner',
+    instrument: 'Acoustic Guitar',
+    tuning: 'Standard E',
+    tiktok: 'https://vt.tiktok.com/ZSqoNF7gX/',
     tags: ['Rhythm / Strumming']
   }
   ,
+   {
+    id: 'neosoul',
+    title: 'Neosoul - ES330',
+    artist: 'Kasuki Isogai',
+    cover: '/images/0011.png',
+    description:
+      'supposedly electric again but good hand strengthening exercise',
+    difficulty: 'Advanced',
+    instrument: 'Acoustic Guitar',
+    tuning: 'Standard E',
+    youtube: 'https://www.youtube.com/watch?v=2qjdiPq4AkU',
+    tags: ['Rhythm / Strumming']
+  }
+  ,
+  {
+    id: 'invisible-string',
+    title: 'Invisible String',
+    artist: 'Taylor Swift',
+    cover: '/images/0012.png',
+    description:
+      '🙍🏿',
+    difficulty: 'Beginner',
+    instrument: 'Acoustic Guitar',
+    tuning: 'Standard E',
+    youtube: 'https://www.youtube.com/watch?v=9GAjP3a32_4',
+    tags: ['Rhythm / Strumming']
+  }
+  ,
+  {
+    id: 'beaches',
+    title: 'Beaches',
+    artist: 'Beabadoobee',
+    cover: '/images/0013.png',
+    description:
+      'Beabadoobs again, im sureeeeee nowwwwwwow im sureee ',
+    difficulty: 'Intermediate',
+    instrument: 'Acoustic Guitar',
+    tuning: 'Standard E',
+    tiktok: 'https://vt.tiktok.com/ZSqoFq3XB/',
+    tags: ['Rhythm / Strumming']
+  },
+  {
+    id: 'fade-into-you',
+    title: 'Fade Into You',
+    artist: 'Mazzy Star',
+    cover: '/images/0014.png',
+    description:
+      '🍰',
+    difficulty: 'Beginner',
+    instrument: 'Acoustic Guitar',
+    tuning: 'Standard E',
+    tiktok: 'hhttps://vt.tiktok.com/ZSqoFHvd5/',
+    tags: ['Rhythm / Strumming']
+  },
+  {
+    id: 'need-2',
+    title: 'Need 2',
+    artist: 'Pinegrove',
+    cover: '/images/0015.png',
+    description:
+      'nothin here to caree abouttt',
+    difficulty: 'Beginner',
+    instrument: 'Acoustic Guitar',
+    tuning: 'High E string is half step down (E A D G B eb)',
+    tiktok: 'https://vt.tiktok.com/ZSqoYhUPS/',
+    tags: ['Rhythm / Strumming']
+  }
+
 
 
 ];
