@@ -23,8 +23,7 @@ export const tutorials: Tutorial[] = [
     id: 'black-hole-sun',
     title: 'Black Hole Sun',
     artist: 'Soundgarden',
-    cover:
-      'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80',
+    cover: '/images/tutorials/black-hole-sun.jpg',
     description:
       'A clean breakdown of the main riff and lead phrasing with emphasis on timing, muted picking, and melodic phrasing.',
     difficulty: 'Intermediate',
@@ -32,14 +31,13 @@ export const tutorials: Tutorial[] = [
     tuning: 'Drop D',
     youtube: 'https://www.youtube.com/watch?v=3qmVyCoHqUc',
     tiktok: 'https://www.tiktok.com/@yourhandle/video/1234567890',
-    tags: ['Fingerstyle', 'Rhythm / Strumming', 'Background Chords']
+    tags: ['Fingerstyle', 'Rhythm / Strumming', 'Flatpicking']
   },
   {
     id: 'dust-in-the-wind',
     title: 'Dust in the Wind',
     artist: 'Kansas',
-    cover:
-      'https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=1200&q=80',
+    cover: '/images/tutorials/dust-in-the-wind.jpg',
     description:
       'A fingerstyle-friendly arrangement focused on chord clarity, restraint, and dynamics for a more expressive performance.',
     difficulty: 'Beginner',
@@ -47,14 +45,13 @@ export const tutorials: Tutorial[] = [
     tuning: 'Standard E',
     youtube: 'https://www.youtube.com/watch?v=RtBBl6Z_1c8',
     tiktok: 'https://www.tiktok.com/@yourhandle/video/1234567891',
-    tags: ['Fingerstyle', 'Background Chords']
+    tags: ['Fingerstyle', 'Rhythm / Strumming']
   },
   {
     id: 'take-it-easy',
     title: 'Take It Easy',
     artist: 'Eagles',
-    cover:
-      'https://images.unsplash.com/photo-1525201548942-d8732f6617a0?auto=format&fit=crop&w=1200&q=80',
+    cover: '/images/tutorials/take-it-easy.jpg',
     description:
       'A rhythm-first lesson built around laid-back strumming, groove control, and chord transitions that feel natural and relaxed.',
     difficulty: 'Beginner',
@@ -62,14 +59,13 @@ export const tutorials: Tutorial[] = [
     tuning: 'Standard E',
     youtube: 'https://www.youtube.com/watch?v=RudU5Y0T6dY',
     tiktok: 'https://www.tiktok.com/@yourhandle/video/1234567892',
-    tags: ['Rhythm / Strumming', 'Background Chords']
+    tags: ['Rhythm / Strumming']
   },
   {
     id: 'wanted-dead-or-alive',
     title: 'Wanted Dead or Alive',
     artist: 'Bon Jovi',
-    cover:
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80',
+    cover: '/images/tutorials/wanted-dead-or-alive.jpg',
     description:
       'A practical breakdown of the iconic intro and rhythm work, with attention to pick attack, movement, and tonal control.',
     difficulty: 'Intermediate',
@@ -77,14 +73,13 @@ export const tutorials: Tutorial[] = [
     tuning: 'Standard E',
     youtube: 'https://www.youtube.com/watch?v=9BMwcO6kq0Y',
     tiktok: 'https://www.tiktok.com/@yourhandle/video/1234567893',
-    tags: ['Rhythm / Strumming', 'Fingerstyle']
+    tags: ['Rhythm / Strumming', 'Flatpicking']
   },
   {
     id: 'fast-car',
     title: 'Fast Car',
     artist: 'Tracy Chapman',
-    cover:
-      'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1200&q=80',
+    cover: '/images/tutorials/fast-car.jpg',
     description:
       'A compact acoustic lesson focused on chord movement, the vocal rhythm, and a clean, steady picking feel.',
     difficulty: 'Beginner',
@@ -92,21 +87,19 @@ export const tutorials: Tutorial[] = [
     tuning: 'Standard E',
     youtube: 'https://www.youtube.com/watch?v=6OQHwQ4PV2E',
     tiktok: 'https://www.tiktok.com/@yourhandle/video/1234567894',
-    tags: ['Fingerstyle', 'Background Chords']
+    tags: ['Fingerstyle']
   },
   {
     id: 'sultans-of-swing',
     title: 'Sultans of Swing',
     artist: 'Dire Straits',
-    cover:
-      'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80',
+    cover: '/images/tutorials/sultans-of-swing.jpg',
     description:
       'A rhythm and lead lesson built around melodic phrasing, syncopation, and a light but articulate tone.',
     difficulty: 'Intermediate',
     instrument: 'Electric Guitar',
     tuning: 'Standard E',
     youtube: 'https://www.youtube.com/watch?v=9VwXQHAKxig',
-    tiktok: 'https://www.tiktok.com/@yourhandle/video/1234567895',
     tags: ['Rhythm / Strumming', 'Fingerstyle']
   }
 ];

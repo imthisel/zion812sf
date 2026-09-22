@@ -3,7 +3,7 @@ import SectionHeader from './components/SectionHeader';
 import TutorialCard from './components/TutorialCard';
 import { fallbackCover, tutorials } from './data/tutorials';
 
-const categoryList = ['Fingerstyle', 'Rhythm / Strumming', 'Background Chords'] as const;
+const categoryList = ['Fingerstyle', 'Rhythm / Strumming', 'Flatpicking'] as const;
 const instrumentOptions = [
   'All',
   'Acoustic Guitar',
@@ -387,15 +387,19 @@ export default function App() {
           <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 sm:p-8">
             <SectionHeader
               eyebrow="About"
-              title="All of my TikTok tutorials in one place"
+              title="All Tutorials I used for My Tiktok Videos"
               description="A simple library of the lessons I’ve used across my TikTok videos."
             />
 
-            <div className="mt-8 max-w-3xl">
+            <div className="mt-8 max-w-3xl space-y-4">
               <p className="text-base leading-7 text-slate-300">
-                This site is basically a collection of the tutorials I’ve used in my TikTok
-                videos. I wanted everything in one place so it’s easier to find a song, learn
-                the arrangement, and jump straight to the original video.
+                This website was made to make it easier for everybody to play the things I’ve
+                played, and to keep everything organized in one place instead of scattered
+                replies in the comments.
+              </p>
+              <p className="text-base leading-7 text-slate-300">
+                It’s also an outside project of mine built to test and improve my programming
+                skills.
               </p>
             </div>
 
@@ -408,11 +412,11 @@ export default function App() {
                   <p className="text-sm font-semibold text-white">{category}</p>
                   <p className="mt-3 text-sm leading-6 text-slate-300">
                     {category === 'Fingerstyle' &&
-                      'Clean fingerpicked patterns and melodic accompaniment work.'}
+                      'Playing the strings with your fingers instead of a pick.'}
                     {category === 'Rhythm / Strumming' &&
-                      'Groove-focused lessons built around strumming and timing.'}
-                    {category === 'Background Chords' &&
-                      'Chord-based support playing for softer accompaniment and song flow.'}
+                      'Just strumming chords either with a pick or just the hand.'}
+                    {category === 'Flatpicking' &&
+                      'Picking individual notes and riffs with a guitar pick.'}
                   </p>
                 </div>
               ))}
