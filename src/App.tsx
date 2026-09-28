@@ -119,6 +119,7 @@ export default function App() {
   const [activeTutorialId, setActiveTutorialId] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [difficulty, setDifficulty] = useState<DifficultyFilter>("All");
+  const [logoFailed, setLogoFailed] = useState(false);
   const [instrument, setInstrument] =
     useState<(typeof instrumentOptions)[number]>("All");
   const [tuning, setTuning] = useState("All");
@@ -189,9 +190,18 @@ export default function App() {
       <header className="sticky top-0 z-30 border-b border-slate-800/80 bg-stone-950/85 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4 lg:px-8">
           <div className="flex items-center gap-2 sm:gap-3">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-500 text-base font-black text-slate-950 sm:h-10 sm:w-10">
-              Z
-            </div>
+            {logoFailed ? (
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-500 text-base font-black text-slate-950 sm:h-10 sm:w-10">
+                Z
+              </div>
+            ) : (
+              <img
+                src="/images/logo.jpg"
+                alt="Zion812sf logo"
+                onError={() => setLogoFailed(true)}
+                className="h-9 w-9 shrink-0 rounded-lg object-cover sm:h-10 sm:w-10"
+              />
+            )}
             <div>
               <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-300 sm:text-sm sm:tracking-[0.25em]">
                 Zion812sf
@@ -222,14 +232,13 @@ export default function App() {
           <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div>
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-amber-400">
-                Zion812sf's Complete Source for Guitar Tutorials
+                Zion812sf's Guitar Tutorial Library
               </p>
               <h1 className="max-w-xl text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                Learn How to Play All the Songs in my Tiktok Account
+                Learn the Songs From My TikTok
               </h1>
               <p className="mt-5 max-w-xl text-base leading-7 text-slate-300 sm:text-lg">
-                A completely free library for all those who are asking for
-                tutorials 🙂
+                Free tutorials for everyone who wants to learn the songs I play
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -286,7 +295,16 @@ export default function App() {
             description="Use the filters to search the song you’re looking for below"
           />
 
-          <div className="mt-8 rounded-[28px] border border-slate-800 bg-slate-900/90 p-4 shadow-2xl shadow-slate-950/40 sm:p-5">
+          <input
+            type="text"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search by song or artist"
+            aria-label="Search tutorials by song or artist"
+            className="mt-6 w-full rounded-2xl border border-slate-700 bg-slate-950/90 px-4 py-3.5 text-sm text-white shadow-[0_0_0_1px_rgba(51,65,85,0.8)] outline-none transition hover:border-slate-500 focus:border-amber-500 focus:ring-4 focus:ring-amber-500/15"
+          />
+
+          <div className="mt-4 rounded-[28px] border border-slate-800 bg-slate-900/90 p-4 shadow-2xl shadow-slate-950/40 sm:p-5">
             <div className="flex items-center justify-between md:hidden">
               <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
                 Filters
@@ -338,20 +356,6 @@ export default function App() {
                   onChange={setTuning}
                   options={["All", ...tuningOptions]}
                 />
-
-                <label className="block col-span-2 xl:col-span-2">
-                  <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-slate-400">
-                    Search
-                  </span>
-                  <input
-                    type="text"
-                    value={query}
-                    onChange={(event) => setQuery(event.target.value)}
-                    placeholder="Search by song or artist"
-                    aria-label="Search tutorials by song or artist"
-                    className="w-full rounded-2xl border border-slate-700 bg-slate-950/90 px-3 py-3.5 text-sm text-white shadow-[0_0_0_1px_rgba(51,65,85,0.8)] outline-none transition hover:border-slate-500 focus:border-amber-500 focus:ring-4 focus:ring-amber-500/15"
-                  />
-                </label>
               </div>
 
               {hasActiveFilters ? (
@@ -413,7 +417,8 @@ export default function App() {
               </p>
               <p className="text-base leading-7 text-slate-300">
                 It’s also a personal project I built to test and improve my
-                programming skills while strengthening my portfolio 🤠
+                programming skills while strengthening my portfolio as a computer
+                science student.
               </p>
             </div>
           </div>
@@ -421,7 +426,7 @@ export default function App() {
 
         <section
           id="playing-styles"
-          className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8"
+          className="mx-auto max-w-7xl px-4 pt-10 pb-8 sm:px-6 sm:pt-16 sm:pb-12 lg:px-8"
         >
           <SectionHeader
             eyebrow="Playing styles"
@@ -464,7 +469,7 @@ export default function App() {
 
         <section
           id="difficulty-guide"
-          className="mx-auto max-w-7xl px-4 py-10 sm:px-4 sm:py-16 lg:px-8"
+          className="mx-auto max-w-7xl px-4 pt-8 pb-10 sm:px-6 sm:pt-12 sm:pb-16 lg:px-8"
         >
           <SectionHeader
             eyebrow="Difficulty guide"
@@ -473,56 +478,56 @@ export default function App() {
           />
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <div className="rounded-3xl border border-emerald-500/30 bg-emerald-500/10 p-5">
-              <div className="mb-4 inline-flex rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-200">
+            <div className="flex flex-col rounded-3xl border border-slate-700 bg-slate-900/70 p-5">
+              <div className="mb-4 inline-flex rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
                 Beginner
               </div>
 
-              <p className="text-sm leading-7 text-slate-200">
+              <p className="mb-5 text-sm leading-7 text-slate-200">
                 Mostly easy strumming, simple chord shapes, and very comfortable
                 fingerpicking.
               </p>
 
-              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+              <ul className="mt-auto space-y-2 border-t border-slate-800 pt-4 text-sm text-slate-300">
                 <li>• Simple strumming patterns</li>
                 <li>• Easy chord transitions</li>
                 <li>• Light fingerpicking with little movement</li>
               </ul>
             </div>
 
-            <div className="rounded-3xl border border-amber-500/30 bg-amber-500/10 p-5">
-              <div className="mb-4 inline-flex rounded-full border border-amber-400/40 bg-amber-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-200">
+            <div className="flex flex-col rounded-3xl border border-slate-700 bg-slate-900/70 p-5">
+              <div className="mb-4 inline-flex rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
                 Intermediate
               </div>
 
-              <p className="text-sm leading-7 text-slate-200">
+              <p className="mb-5 text-sm leading-7 text-slate-200">
                 These usually include strumming with more bar chords plus
                 fingerpicking that is a little more involved but def still
                 manageable with practice.
               </p>
 
-              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+              <ul className="mt-auto space-y-2 border-t border-slate-800 pt-4 text-sm text-slate-300">
                 <li>• More bar chords</li>
                 <li>• Stronger rhythm control</li>
                 <li>• Fingerpicking that feels a bit "tougher"</li>
               </ul>
             </div>
 
-            <div className="rounded-3xl border border-rose-500/30 bg-rose-500/10 p-5">
-              <div className="mb-4 inline-flex rounded-full border border-rose-400/40 bg-rose-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-rose-200">
+            <div className="flex flex-col rounded-3xl border border-slate-700 bg-slate-900/70 p-5">
+              <div className="mb-4 inline-flex rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
                 Advanced
               </div>
 
-              <p className="text-sm leading-7 text-slate-200">
+              <p className="mb-5 text-sm leading-7 text-slate-200">
                 These are the songs I personally find the hardest and least
                 comfortable to play like fingerstyle with slaps, harmonics,
                 difficult transitions, and j techniques that needs more control
                 and precision.
               </p>
 
-              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+              <ul className="mt-auto space-y-2 border-t border-slate-800 pt-4 text-sm text-slate-300">
                 <li>• Fingerstyle with slaps</li>
-                <li>• Harmonicss</li>
+                <li>• Harmonics</li>
                 <li>• Harder patterns</li>
               </ul>
             </div>

@@ -304,7 +304,7 @@ export const tutorials: Tutorial[] = [
     tags: ["Flatpicking"],
   },
   {
-    id: "hotel-california",
+    id: "hotel-californiaa",
     title: "Hotel California",
     artist: "Eagles",
     cover: "/images/0025.png",
@@ -519,7 +519,7 @@ export const tutorials: Tutorial[] = [
     instrument: "Acoustic Guitar",
     tuning: "Standard",
     youtube: "https://www.youtube.com/watch?v=eTYwKWj_2hA",
-    tags: ["Fingerstyle", "Strumming"],
+    tags: ["Fingerstyle", "Rhythm / Strumming"],
   },
    {
     id: "with-arms-wide-open",
@@ -565,9 +565,9 @@ export const tutorials: Tutorial[] = [
     description: "One of my fav worship songs",
     difficulty: "Beginner",
     instrument: "Piano",
-    tuning: "",
+    tuning: "Standard",
     youtube: "https://www.youtube.com/watch?v=MZL9uF9GFs4&t=27s",
-    tags: [""],
+    tags: ["Fingerstyle"],
   },
     {
     id: "tell-me-where-it-hurts",
@@ -925,9 +925,9 @@ export const tutorials: Tutorial[] = [
     description: "",
     difficulty: "Beginner",
     instrument: "Piano",
-    tuning: "",
+    tuning: "Standard",
     youtube: "https://www.youtube.com/watch?v=2AHhFbOqFfw&t=17s",
-    tags: [""],
+    tags: ["Fingerstyle"],
   },
   
 
