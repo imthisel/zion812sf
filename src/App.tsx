@@ -436,7 +436,7 @@ export default function App() {
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             <div className="rounded-3xl border border-slate-700 bg-slate-900/70 p-5">
-              <div className="mb-4 inline-flex rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
+              <div className="mb-4 inline-flex self-start rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
                 Fingerstyle
               </div>
 
@@ -446,7 +446,7 @@ export default function App() {
             </div>
 
             <div className="rounded-3xl border border-slate-700 bg-slate-900/70 p-5">
-              <div className="mb-4 inline-flex rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
+              <div className="mb-4 inline-flex self-start rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
                 Rhythm / Strumming
               </div>
 
@@ -456,7 +456,7 @@ export default function App() {
             </div>
 
             <div className="rounded-3xl border border-slate-700 bg-slate-900/70 p-5">
-              <div className="mb-4 inline-flex rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
+              <div className="mb-4 inline-flex self-start rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
                 Flatpicking
               </div>
 
@@ -479,7 +479,7 @@ export default function App() {
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             <div className="flex flex-col rounded-3xl border border-slate-700 bg-slate-900/70 p-5">
-              <div className="mb-4 inline-flex rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
+              <div className="mb-4 inline-flex self-start rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
                 Beginner
               </div>
 
@@ -496,7 +496,7 @@ export default function App() {
             </div>
 
             <div className="flex flex-col rounded-3xl border border-slate-700 bg-slate-900/70 p-5">
-              <div className="mb-4 inline-flex rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
+              <div className="mb-4 inline-flex self-start rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
                 Intermediate
               </div>
 
@@ -514,7 +514,7 @@ export default function App() {
             </div>
 
             <div className="flex flex-col rounded-3xl border border-slate-700 bg-slate-900/70 p-5">
-              <div className="mb-4 inline-flex rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
+              <div className="mb-4 inline-flex self-start rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-200">
                 Advanced
               </div>
 
